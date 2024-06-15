@@ -5,6 +5,7 @@ import com.retailapp.model.Product;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BillTest {
 
@@ -25,12 +26,23 @@ public class BillTest {
     }
 
     @Test
-    public void testCustomerDiscount() {
+    public void testCustomerDiscountWithTenure() {
         Bill bill = new Bill(new CustomerDiscount());
         Product product = new Product("1", "Laptop", 1000, false);
         bill.addProduct(product);
+        bill.setCustomerTenure(3); // Set customer tenure as 3 years
         assertEquals(900, bill.calculateTotalPayableAmount(), 0.01);
     }
+
+    @Test
+    public void testCustomerDiscountWithoutTenure() {
+        Bill bill = new Bill(new CustomerDiscount());
+        Product product = new Product("1", "Laptop", 1000, false);
+        bill.addProduct(product);
+        bill.setCustomerTenure(1); // Set customer tenure as 1 year
+        assertEquals(950, bill.calculateTotalPayableAmount(), 0.01);
+    }
+
 
     @Test
     public void testGroceryNoDiscount() {
@@ -69,4 +81,26 @@ public class BillTest {
         bill.addProduct(product);
         assertEquals(190, bill.calculateTotalPayableAmount(), 0.01);
     }
+
+    @Test
+    public void testBusinessFlowWithProductModification() {
+        Bill bill = new Bill(new EmployeeDiscount());
+        Product product = new Product("1", "Tablet", 300, false);
+        bill.addProduct(product);
+
+        product.setName("Tablet Pro");
+        product.setPrice(400);
+
+        assertEquals(260, bill.calculateTotalPayableAmount(), 0.01);
+    }
+
+
+    @Test
+    public void testSetCustomerTenureWithNonCustomerDiscount() {
+        Bill bill = new Bill(new EmployeeDiscount()); // Assuming EmployeeDiscount does not require customer tenure
+        UnsupportedOperationException exception = assertThrows(UnsupportedOperationException.class, () -> {
+            bill.setCustomerTenure(2);
+        });
+
+        }
 }

@@ -1,5 +1,6 @@
 package com.retailapp.model;
 
+import com.retailapp.service.CustomerDiscount;
 import com.retailapp.service.Discount;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 public class Bill {
     private List<Product> products;
     private Discount discountStrategy;
+    private Integer customerTenure;
 
     public Bill(Discount discountStrategy) {
         this.products = new ArrayList<>();
@@ -16,6 +18,15 @@ public class Bill {
 
     public void addProduct(Product product) {
         products.add(product);
+    }
+
+    public void setCustomerTenure(int customerTenure) {
+        if (discountStrategy instanceof CustomerDiscount) {
+            this.customerTenure = customerTenure;
+            ((CustomerDiscount) discountStrategy).setCustomerTenure(customerTenure);
+        } else {
+            throw new UnsupportedOperationException("Current discount strategy does not require customer tenure.");
+        }
     }
 
     public double calculateTotalPayableAmount() {

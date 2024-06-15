@@ -8,6 +8,7 @@ class RetailStoreAppApplicationTests {
 
 	@Test
 	void contextLoads() {
+		RetailStoreAppApplication.main(new String[] {});
 	}
 
 }
