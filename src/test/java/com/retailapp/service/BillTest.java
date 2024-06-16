@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class BillTest {
+class BillTest {
 
     @Test
-    public void testEmployeeDiscount() {
+    void testEmployeeDiscount() {
         Bill bill = new Bill(new EmployeeDiscount());
         Product product = new Product("1", "Laptop", 1000, false);
         bill.addProduct(product);
@@ -18,7 +18,7 @@ public class BillTest {
     }
 
     @Test
-    public void testAffiliateDiscount() {
+    void testAffiliateDiscount() {
         Bill bill = new Bill(new AffiliateDiscount());
         Product product = new Product("1", "Laptop", 1000, false);
         bill.addProduct(product);
@@ -26,7 +26,7 @@ public class BillTest {
     }
 
     @Test
-    public void testCustomerDiscountWithTenure() {
+    void testCustomerDiscountWithTenure() {
         Bill bill = new Bill(new CustomerDiscount());
         Product product = new Product("1", "Laptop", 1000, false);
         bill.addProduct(product);
@@ -35,7 +35,7 @@ public class BillTest {
     }
 
     @Test
-    public void testCustomerDiscountWithoutTenure() {
+    void testCustomerDiscountWithoutTenure() {
         Bill bill = new Bill(new CustomerDiscount());
         Product product = new Product("1", "Laptop", 1000, false);
         bill.addProduct(product);
@@ -45,7 +45,7 @@ public class BillTest {
 
 
     @Test
-    public void testGroceryNoDiscount() {
+    void testGroceryNoDiscount() {
         Bill bill = new Bill(new EmployeeDiscount());
         Product product = new Product("1", "Milk", 200, true);
         bill.addProduct(product);
@@ -53,7 +53,7 @@ public class BillTest {
     }
 
     @Test
-    public void testFlatDiscount() {
+    void testFlatDiscount() {
         Bill bill = new Bill(new EmployeeDiscount());
         Product product = new Product("1", "Laptop", 1000, false);
         Product product2 = new Product("2", "Phone", 500, false);
@@ -63,7 +63,7 @@ public class BillTest {
     }
 
     @Test
-    public void testMultipleProducts() {
+    void testMultipleProducts() {
         Bill bill = new Bill(new AffiliateDiscount());
         Product product1 = new Product("1", "Laptop", 1000, false);
         Product product2 = new Product("2", "Phone", 500, false);
@@ -75,7 +75,7 @@ public class BillTest {
     }
 
     @Test
-    public void testCustomerGroceryNoDiscount() {
+    void testCustomerGroceryNoDiscount() {
         Bill bill = new Bill(new CustomerDiscount());
         Product product = new Product("1", "Milk", 200, true);
         bill.addProduct(product);
@@ -83,7 +83,7 @@ public class BillTest {
     }
 
     @Test
-    public void testBusinessFlowWithProductModification() {
+    void testBusinessFlowWithProductModification() {
         Bill bill = new Bill(new EmployeeDiscount());
         Product product = new Product("1", "Tablet", 300, false);
         bill.addProduct(product);
@@ -96,7 +96,7 @@ public class BillTest {
 
 
     @Test
-    public void testSetCustomerTenureWithNonCustomerDiscount() {
+    void testSetCustomerTenureWithNonCustomerDiscount() {
         Bill bill = new Bill(new EmployeeDiscount()); // Assuming EmployeeDiscount does not require customer tenure
         UnsupportedOperationException exception = assertThrows(UnsupportedOperationException.class, () -> {
             bill.setCustomerTenure(2);

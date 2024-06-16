@@ -23,7 +23,7 @@ public class Bill {
     public void setCustomerTenure(int customerTenure) {
         if (discountStrategy instanceof CustomerDiscount) {
             this.customerTenure = customerTenure;
-            ((CustomerDiscount) discountStrategy).setCustomerTenure(customerTenure);
+            discountStrategy.setCustomerTenure(customerTenure);
         } else {
             throw new UnsupportedOperationException("Current discount strategy does not require customer tenure.");
         }

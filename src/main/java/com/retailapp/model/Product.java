@@ -1,8 +1,5 @@
 package com.retailapp.model;
 
-import lombok.AllArgsConstructor;
-
-
 public class Product {
     private String productId;
     private String name;
