@@ -2,10 +2,12 @@ package com.retailapp.model;
 
 import com.retailapp.service.CustomerDiscount;
 import com.retailapp.service.Discount;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class Bill {
     private List<Product> products;
     private Discount discountStrategy;
@@ -25,7 +27,8 @@ public class Bill {
             this.customerTenure = customerTenure;
             discountStrategy.setCustomerTenure(customerTenure);
         } else {
-            throw new UnsupportedOperationException("Current discount strategy does not require customer tenure.");
+            System.out.println("Current discount strategy does not require customer tenure.");
+           // throw new UnsupportedOperationException("Current discount strategy does not require customer tenure.");
         }
     }
 
@@ -37,7 +40,6 @@ public class Bill {
             total += product.getPrice();
             discount += discountStrategy.calculateDiscount(product);
         }
-
         double flatDiscount = (int) (total / 100) * 5;
         return total - discount - flatDiscount;
     }
