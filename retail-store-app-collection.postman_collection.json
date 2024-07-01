@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "7c8e439d-3bf7-4075-8b04-c2f5b8240023",
+		"name": "retail-store-app-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "329137"
+	},
+	"item": [
+		{
+			"name": "Create Bill",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/bills/create?discountType=employee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"bills",
+						"create"
+					],
+					"query": [
+						{
+							"key": "discountType",
+							"value": "employee"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product to Bill",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"2\",\n    \"name\": \"ipad\",\n    \"price\": 3000,\n    \"isGrocery\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/bills/bill-1/addProduct",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"bills",
+						"bill-1",
+						"addProduct"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set Customer Tenure",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"1\",\n    \"name\": \"Laptop\",\n    \"price\": 1000,\n    \"isGrocery\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/bills/bill-1/setCustomerTenure?tenure=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"",
+						"api",
+						"bills",
+						"bill-1",
+						"setCustomerTenure"
+					],
+					"query": [
+						{
+							"key": "tenure",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Calculate Total Payable Amount",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/bills/bill-1/calculate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"bills",
+						"bill-1",
+						"calculate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Calculate Total Payable Amount Based DiscountType&Tenure",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"id\": \"1\",\n        \"name\": \"Laptop\",\n        \"price\": 549,\n        \"isGrocery\": false\n    },\n    {\n        \"id\": \"2\",\n        \"name\": \"Milk\",\n        \"price\": 2.3,\n        \"isGrocery\": true\n    },\n    {\n        \"id\": \"3\",\n        \"name\": \"oil\",\n        \"price\": 5.3,\n        \"isGrocery\": false\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/bills/calculateTotal?discountType=employee&tenure=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"bills",
+						"calculateTotal"
+					],
+					"query": [
+						{
+							"key": "discountType",
+							"value": "employee"
+						},
+						{
+							"key": "tenure",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
